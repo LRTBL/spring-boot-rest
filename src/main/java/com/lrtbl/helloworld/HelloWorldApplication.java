@@ -1,5 +1,6 @@
 package com.lrtbl.helloworld;
 
+import com.lrtbl.helloworld.aop.TargetObject;
 import com.lrtbl.helloworld.dependencyinjection.classes.Animal;
 import com.lrtbl.helloworld.lifecycle.LIfeCycleBean;
 import com.lrtbl.helloworld.profiles.EnviromentService;
@@ -19,13 +20,14 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 public class HelloWorldApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(HelloWorldApplication.class);
-
+//	private static final Logger log = LoggerFactory.getLogger(HelloWorldApplication.class);
 
 	public static void main(String[] args) {
-//		SpringApplication.run(HelloWorldApplication.class, args);
-		ConfigurableApplicationContext context = SpringApplication.run(HelloWorldApplication.class, args);
-		LIfeCycleBean bean = context.getBean(LIfeCycleBean.class);
+		SpringApplication.run(HelloWorldApplication.class, args);
+//		ConfigurableApplicationContext context = SpringApplication.run(HelloWorldApplication.class, args);
+//		TargetObject targetObject = context.getBean(TargetObject.class);
+//		targetObject.helloString("HOLA MUNDO");
+//		LIfeCycleBean bean = context.getBean(LIfeCycleBean.class);
 //		EnviromentService enviromentService = context.getBean(EnviromentService.class);
 //		log.info(enviromentService.getEnviroment());
 	}
