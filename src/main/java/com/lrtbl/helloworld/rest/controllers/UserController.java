@@ -3,18 +3,20 @@ package com.lrtbl.helloworld.rest.controllers;
 import com.lrtbl.helloworld.rest.models.User;
 import com.lrtbl.helloworld.rest.services.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> getUser(@RequestParam(value="startWith", required = false) String startWith) {
@@ -27,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser (@RequestBody User user) {
+    public ResponseEntity<User> createUser (@Valid @RequestBody User user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 

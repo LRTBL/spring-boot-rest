@@ -3,12 +3,12 @@ package com.lrtbl.helloworld.rest.services;
 import com.github.javafaker.Faker;
 import com.lrtbl.helloworld.rest.models.User;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private Faker faker;
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
 
     @PostConstruct
     public void init() {
@@ -48,7 +48,7 @@ public class UserService {
         return user;
     }
 
-    public User updateUser (User user, String userName){
+    public User updateUser (@NotNull User user, String userName){
         User userToBeUpload = getUserByUsername(userName);
         userToBeUpload.setNickName(user.getNickName());
         userToBeUpload.setPassword(user.getPassword());
