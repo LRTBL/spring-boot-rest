@@ -16,11 +16,11 @@ public class UserInRole {
     @Column(name = "id")
     private Integer id;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
 }
