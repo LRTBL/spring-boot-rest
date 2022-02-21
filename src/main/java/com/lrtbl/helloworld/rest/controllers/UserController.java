@@ -49,6 +49,12 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserByUsername(username), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Void> deleteUserByUsername (@PathVariable("username") String username){
+        userService.deleteUserByUsername(username);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @PostMapping
     public ResponseEntity<User> authenticate (@RequestBody UserDTO userDTO){
         return new ResponseEntity<>(userService.getUserByUsernameAndPassword(userDTO.getUsername(), userDTO.getPassword()), HttpStatus.OK);

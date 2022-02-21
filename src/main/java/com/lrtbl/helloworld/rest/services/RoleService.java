@@ -4,6 +4,7 @@ import com.lrtbl.helloworld.rest.entities.Role;
 import com.lrtbl.helloworld.rest.repositories.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -16,12 +17,16 @@ public class RoleService {
 
     private RoleRepository roleRepository;
 
+    private KafkaTemplate<Integer, String> kafkaTemplate;
+
     public List<Role> getRoles(){
         return roleRepository.findAll();
     }
 
     public Role createRole (Role role) {
-        return roleRepository.save(role);
+        Role roleCreated = roleRepository.save(role);
+        kafkaTemplate.send("spring-topic", roleCreated.getName());
+        return roleCreated;
     }
 
     public Role updateRole (Integer roleId,  Role role){
