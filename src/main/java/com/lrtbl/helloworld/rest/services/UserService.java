@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import springfox.documentation.annotations.Cacheable;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -43,7 +41,7 @@ public class UserService {
         return userRepository.findByUsernameAndPassword(username, password).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User by %s not found", username)));
     }
 
-    public Page<User> getUsernames(Integer page, Integer size) {
+    public Page<User>   getUsernames(Integer page, Integer size) {
         return userRepository.findUsernames(PageRequest.of(page, size));
     }
 }
